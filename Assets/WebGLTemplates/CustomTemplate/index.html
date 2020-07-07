@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ball Juggler | Luke Ahrens-Townsend</title>
+    <link rel="shortcut icon" href="./TemplateData/favicon.ico">
+
+    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+    <script src="./TemplateData/UnityProgress.js"></script>
+    <link rel="stylesheet" href="./TemplateData/style.css">
+    <script>
+        var unityInstance = UnityLoader.instantiate("unityContainer", "%UNITY_WEBGL_BUILD_URL%");
+    </script>
+
+    <style>
+        body {
+            background-color: #111;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #unityContainer {
+            background: none !important;
+            border: 1px solid #222 !important;
+            border-radius: 3px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            height: 600px;
+            width: 960px;
+        }
+
+        #unityContainer canvas {
+            border-radius: 3px;
+        }
+
+        .fullscreen {
+            border-radius: 3px;
+        }
+
+        .title {
+            color: #888
+        }
+    </style>
+</head>
+
+<body>
+    <div class="webgl-content">
+        <div id="unityContainer"></div>
+        <div class="footer">
+            <div class="webgl-logo"></div>
+            <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+            <div class="title">Ball Juggler by Luke Ahrens-Townsend | Fullscreen</div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -58,11 +58,6 @@ public class GameController : MonoBehaviour
         soccerBallRigidbody.useGravity = false;
         originalPosition = soccerBallTransform.position;
 
-        // Boundaries
-        leftWall.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 2.0f));
-        rightWall.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.5f, 2.0f));
-        losingCollider.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, -0.1f, 2.0f));
-
         // UI
         originalScoreTextColor = scoreText.color;
 
@@ -88,16 +83,12 @@ public class GameController : MonoBehaviour
 
         if (gameOverPanel.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Backspace))
                 LoadMainMenu();
 
             if (Input.GetMouseButtonDown(0))
                 ResetGame(gameMode);
         }
-
-        // Double check ball is using gravity when game is playing
-        if (isGamePlaying)
-            soccerBallRigidbody.useGravity = true;
     }
 
     public void LoadMainMenu()
@@ -122,9 +113,15 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
+        startGamePrompt.enabled = false;
         isGamePlaying = true;
         soccerBallRigidbody.useGravity = true;
-        startGamePrompt.enabled = false;
+        soccerBallRigidbody.mass = 0.1f;
+
+        // Boundaries
+        losingCollider.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, -0.1f, 2.0f));
+        leftWall.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 2.0f));
+        rightWall.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.5f, 2.0f));
 
         if (gameMode == TimeTrialGameMode || gameMode == BeatTheClockGameMode)
             StartCoroutine(RunTimer());
