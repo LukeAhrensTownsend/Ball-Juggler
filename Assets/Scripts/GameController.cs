@@ -45,7 +45,6 @@ public class GameController : MonoBehaviour
     private float timeTrialHighScore;
     private int targetPracticeHighScore;
     private float beatTheClockHighScore;
-    private bool isGamePlaying;
 
     private void Awake()
     {
@@ -65,7 +64,6 @@ public class GameController : MonoBehaviour
         gameMode = JuggleGameMode;
         score = 0;
         scoreTime = 0;
-        isGamePlaying = false;
         juggleHighScore = PlayerPrefs.GetInt("JuggleHighScore", 0);
         juggleHighScoreText.text = $"HIGH SCORE: {juggleHighScore.ToString()}";
         timeTrialHighScore = PlayerPrefs.GetFloat("TimeTrialHighScore", 0);
@@ -114,7 +112,6 @@ public class GameController : MonoBehaviour
     private void StartGame()
     {
         startGamePrompt.enabled = false;
-        isGamePlaying = true;
         soccerBallRigidbody.useGravity = true;
         soccerBallRigidbody.mass = 0.1f;
 
@@ -150,9 +147,6 @@ public class GameController : MonoBehaviour
         gameOverPanel.SetActive(true);
         scoreText.enabled = false;
         StopAllCoroutines();
-
-        // State
-        isGamePlaying = false;
 
         // High Scores
         switch (gameMode)
